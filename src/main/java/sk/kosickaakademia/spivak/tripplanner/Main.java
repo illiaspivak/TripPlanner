@@ -7,8 +7,12 @@ public class Main
 {
     public static void main( String[] args )
     {
-        MongoDB mongoDB = new MongoDB();
-        Trip trip = new Trip("Ďumbier", "Nízké Tatry", 30,false, 3);
-        mongoDB.insertTrip(trip);
+        TestGetAllTrips();
     }
+
+    public static void TestGetAllTrips(){
+        MongoDB mongoDB = new MongoDB();
+        System.out.println(mongoDB.getAllTrips());
+    }
+
 }

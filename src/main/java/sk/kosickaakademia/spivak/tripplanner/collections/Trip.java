@@ -34,4 +34,9 @@ public class Trip {
     public int getDifficultyLevel() {
         return difficultyLevel;
     }
+
+    @Override
+    public String toString(){
+        return "Trip --> title: " + title + "; place: " + place + "; approximate distance: "  + approximateDistance + "; place visited: " + placeVisited + "; difficulty level: " + difficultyLevel + ";";
+    }
 }
