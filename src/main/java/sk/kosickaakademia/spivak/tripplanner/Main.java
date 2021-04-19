@@ -7,13 +7,12 @@ public class Main
 {
     public static void main( String[] args )
     {
-        TestInsertTrip();
         TestGetAllTrips();
     }
 
     public static void TestGetAllTrips(){
         MongoDB mongoDB = new MongoDB();
-        System.out.println(mongoDB.getAllTrips());
+        System.out.println(mongoDB.getAllTrips(3));
     }
 
     public static void TestInsertTrip(){

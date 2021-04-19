@@ -61,4 +61,34 @@ public class MongoDB {
         return null;
     }
 
+    /**
+     * Creating a list of trips of a certain level of difficulty from the database
+     * @param level
+     * @return List<Trip>
+     */
+    public List<Trip> getAllTrips(int level){
+        try{
+            MongoDatabase database = client.getDatabase("tripplanner");
+            MongoCollection<Document> collection = database.getCollection("trips");
+            log.info("Connect to the database");
+            List<Trip> list = new ArrayList<>();
+            for (Document document : collection.find()){
+                int difficultyLevel = document.getInteger("difficultyLevel");
+                if(difficultyLevel==level) {
+                    String title = document.getString("title");
+                    String place = document.getString("place");
+                    int distance = document.getInteger("distance");
+                    boolean placeVisited = document.getBoolean("placeVisited");
+                    Trip trip = new Trip(title, place, distance, placeVisited, difficultyLevel);
+                    list.add(trip);
+                }
+            }
+            log.okay("List of trips created");
+            return list;
+        }catch (Exception e){
+            log.error(e.toString());
+        }
+        return null;
+    }
+
 }
