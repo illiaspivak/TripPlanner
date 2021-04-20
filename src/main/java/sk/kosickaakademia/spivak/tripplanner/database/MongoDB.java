@@ -126,21 +126,30 @@ public class MongoDB {
      * Changing the placeVisited parameter from "false" to "true"
      * @param name of the trip
      */
-    public void setPlaceVisited(String name) {
+    public boolean setPlaceVisited(String name) {
         try{
             MongoDatabase database = client.getDatabase("tripplanner");
+            MongoCollection<Document> collection = database.getCollection("trips");
             log.info("Connect to the database");
+            for (Document document : collection.find()){
+                String title = document.getString("title");
+                if(title.equals(name)) {
+                    BasicDBObject searchQuery = new BasicDBObject();
+                    searchQuery.append("title", name);
 
-            BasicDBObject searchQuery = new BasicDBObject();
-            searchQuery.append("title", name);
+                    BasicDBObject updateQuery = new BasicDBObject();
+                    updateQuery.append("$set", new BasicDBObject().append("placeVisited", true));
 
-            BasicDBObject updateQuery = new BasicDBObject();
-            updateQuery.append("$set", new BasicDBObject().append("placeVisited", true));
-
-            database.getCollection("trips").updateMany(searchQuery, updateQuery);
-            log.info("Changed the value from \"false\" to \" true\"");
+                    database.getCollection("trips").updateMany(searchQuery, updateQuery);
+                    log.info("Changed the value from \"false\" to \" true\"");
+                    return true;
+                }
+            }
+            log.error("This title is not in the database");
+            return false;
         }catch (Exception e){
             log.error(e.toString());
         }
+        return false;
     }
 }
