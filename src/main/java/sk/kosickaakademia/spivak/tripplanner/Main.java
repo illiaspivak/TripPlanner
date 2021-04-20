@@ -12,7 +12,7 @@ public class Main
 
     public static void TestGetAllTrips(){
         MongoDB mongoDB = new MongoDB();
-        System.out.println(mongoDB.getAllTrips(3));
+        System.out.println(mongoDB.getAllTrips("Vysoke Tatry"));
     }
 
     public static void TestInsertTrip(){

@@ -91,4 +91,34 @@ public class MongoDB {
         return null;
     }
 
+    /**
+     * Creating a list of trips of a certain place from the database
+     * @param location
+     * @return List<Trip>
+     */
+    public List<Trip> getAllTrips(String location){
+        try{
+            MongoDatabase database = client.getDatabase("tripplanner");
+            MongoCollection<Document> collection = database.getCollection("trips");
+            log.info("Connect to the database");
+            List<Trip> list = new ArrayList<>();
+            for (Document document : collection.find()){
+                String place = document.getString("place");
+                if(place.equals(location)) {
+                    String title = document.getString("title");
+                    int distance = document.getInteger("distance");
+                    boolean placeVisited = document.getBoolean("placeVisited");
+                    int difficultyLevel = document.getInteger("difficultyLevel");
+                    Trip trip = new Trip(title, place, distance, placeVisited, difficultyLevel);
+                    list.add(trip);
+                }
+            }
+            log.okay("List of trips created");
+            return list;
+        }catch (Exception e){
+            log.error(e.toString());
+        }
+        return null;
+    }
+
 }

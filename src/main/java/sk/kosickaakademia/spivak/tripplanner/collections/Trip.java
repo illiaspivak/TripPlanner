@@ -37,6 +37,11 @@ public class Trip {
 
     @Override
     public String toString(){
-        return "Trip --> title: " + title + "; place: " + place + "; approximate distance: "  + approximateDistance + "; place visited: " + placeVisited + "; difficulty level: " + difficultyLevel + ";";
+        return "Trip --> " +
+                "title: " + title +
+                "; place: " + place +
+                "; approximate distance: "  + approximateDistance +
+                "; place visited: " + placeVisited +
+                "; difficulty level: " + difficultyLevel;
     }
 }
