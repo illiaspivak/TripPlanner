@@ -7,12 +7,13 @@ public class Main
 {
     public static void main( String[] args )
     {
+        TestUpdatePlaceVisited();
         TestGetAllTrips();
     }
 
     public static void TestGetAllTrips(){
         MongoDB mongoDB = new MongoDB();
-        System.out.println(mongoDB.getAllTrips("Vysoke Tatry"));
+        System.out.println(mongoDB.getAllTrips());
     }
 
     public static void TestInsertTrip(){
@@ -23,6 +24,11 @@ public class Main
         int difficultyLevel = 1;
         Trip trip = new Trip(title,place,distance,false,difficultyLevel);
         mongoDB.insertTrip(trip);
+    }
+
+    public static void TestUpdatePlaceVisited(){
+        MongoDB mongoDB = new MongoDB();
+        mongoDB.setPlaceVisited("Ďumbier");
     }
 
 }

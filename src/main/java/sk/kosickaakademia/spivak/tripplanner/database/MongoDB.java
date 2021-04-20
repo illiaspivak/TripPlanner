@@ -1,5 +1,6 @@
 package sk.kosickaakademia.spivak.tripplanner.database;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -121,4 +122,25 @@ public class MongoDB {
         return null;
     }
 
+    /**
+     * Changing the placeVisited parameter from "false" to "true"
+     * @param name of the trip
+     */
+    public void setPlaceVisited(String name) {
+        try{
+            MongoDatabase database = client.getDatabase("tripplanner");
+            log.info("Connect to the database");
+
+            BasicDBObject searchQuery = new BasicDBObject();
+            searchQuery.append("title", name);
+
+            BasicDBObject updateQuery = new BasicDBObject();
+            updateQuery.append("$set", new BasicDBObject().append("placeVisited", true));
+
+            database.getCollection("trips").updateMany(searchQuery, updateQuery);
+            log.info("Changed the value from \"false\" to \" true\"");
+        }catch (Exception e){
+            log.error(e.toString());
+        }
+    }
 }
