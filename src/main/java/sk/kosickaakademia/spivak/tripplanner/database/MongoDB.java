@@ -6,6 +6,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import sk.kosickaakademia.spivak.tripplanner.collections.Trip;
@@ -151,5 +152,33 @@ public class MongoDB {
             log.error(e.toString());
         }
         return false;
+    }
+
+    /**
+     * Created Json all trips
+     * @return Json
+     */
+    public String getAllTripsJson() {
+        try {
+            MongoDatabase database = client.getDatabase("tripplanner");
+            MongoCollection<Document> collection = database.getCollection("trips");
+
+            JSONArray jsonArray = new JSONArray();
+
+            for (Document doc : collection.find()) {
+                try {
+                    JSONObject tripJson = (JSONObject) new JSONParser().parse(doc.toJson());
+                    jsonArray.add(tripJson);
+
+                } catch (org.json.simple.parser.ParseException e) {
+                    log.error(e.toString());
+                }
+            }
+            log.okay("Json file created");
+            return jsonArray.toJSONString();
+        } catch (Exception e) {
+            log.error(e.toString());
+        }
+        return null;
     }
 }

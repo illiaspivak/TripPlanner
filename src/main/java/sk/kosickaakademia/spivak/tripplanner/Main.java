@@ -7,13 +7,17 @@ public class Main
 {
     public static void main( String[] args )
     {
-        TestUpdatePlaceVisited();
-        TestGetAllTrips();
+        TestGetAllTripsJson();
     }
 
     public static void TestGetAllTrips(){
         MongoDB mongoDB = new MongoDB();
         System.out.println(mongoDB.getAllTrips());
+    }
+
+    public static void TestGetAllTripsJson(){
+        MongoDB mongoDB = new MongoDB();
+        System.out.println(mongoDB.getAllTripsJson());
     }
 
     public static void TestInsertTrip(){
