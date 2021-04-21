@@ -28,6 +28,10 @@ public class MongoDB {
      * @param trip
      */
     public void insertTrip(Trip trip) {
+        if(trip == null){
+            log.error("No input data");
+            return;
+        }
         try{
             MongoDatabase database = client.getDatabase("tripplanner");
             MongoCollection<Document> collection = database.getCollection("trips");
@@ -72,6 +76,10 @@ public class MongoDB {
      * @return List<Trip>
      */
     public List<Trip> getAllTrips(int level){
+        if (level < 1 || level > 3){
+            log.error("Invalid input data");
+            return null;
+        }
         try{
             MongoDatabase database = client.getDatabase("tripplanner");
             MongoCollection<Document> collection = database.getCollection("trips");
@@ -102,6 +110,10 @@ public class MongoDB {
      * @return List<Trip>
      */
     public List<Trip> getAllTrips(String location){
+        if(location == null){
+            log.error("No input data");
+            return null;
+        }
         try{
             MongoDatabase database = client.getDatabase("tripplanner");
             MongoCollection<Document> collection = database.getCollection("trips");
@@ -131,6 +143,10 @@ public class MongoDB {
      * @param name of the trip
      */
     public boolean setPlaceVisited(String name) {
+        if(name == null){
+            log.error("No input data");
+            return false;
+        }
         try{
             MongoDatabase database = client.getDatabase("tripplanner");
             MongoCollection<Document> collection = database.getCollection("trips");
@@ -190,6 +206,10 @@ public class MongoDB {
      * @param trip
      */
     public void insertTripJSON(JSONObject trip) {
+        if(trip == null){
+            log.error("No input data");
+            return;
+        }
         try{
             MongoDatabase database = client.getDatabase("tripplanner");
             MongoCollection<Document> collection = database.getCollection("trips");
@@ -206,6 +226,10 @@ public class MongoDB {
      * @param name
      */
     public void deleteTrip(String name){
+        if(name == null){
+            log.error("No input data");
+            return;
+        }
         try{
             MongoDatabase database = client.getDatabase("tripplanner");
             MongoCollection<Document> collection = database.getCollection("trips");
