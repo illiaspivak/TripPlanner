@@ -20,6 +20,10 @@ public class Main
         System.out.println(mongoDB.getAllTripsJson());
     }
 
+    public static void TestinsertTripJSON(){
+        MongoDB mongoDB = new MongoDB();
+    }
+
     public static void TestInsertTrip(){
         MongoDB mongoDB = new MongoDB();
         String title = "Vodopád Skok";

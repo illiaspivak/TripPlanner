@@ -181,4 +181,20 @@ public class MongoDB {
         }
         return null;
     }
+
+    /**
+     * Adding a Json to the database
+     * @param trip
+     */
+    public void insertTripJSON(JSONObject trip) {
+        try{
+            MongoDatabase database = client.getDatabase("tripplanner");
+            MongoCollection<Document> collection = database.getCollection("trips");
+            Document document = new Document(trip);
+            collection.insertOne(document);
+            log.okay("Trip added");
+        }catch (Exception e){
+            log.error(e.toString());
+        }
+    }
 }
