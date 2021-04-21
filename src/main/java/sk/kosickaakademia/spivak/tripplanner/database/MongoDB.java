@@ -1,10 +1,12 @@
 package sk.kosickaakademia.spivak.tripplanner.database;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,6 +17,7 @@ import sk.kosickaakademia.spivak.tripplanner.log.Log;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class MongoDB {
     Log log = new Log();
@@ -193,6 +196,21 @@ public class MongoDB {
             Document document = new Document(trip);
             collection.insertOne(document);
             log.okay("Trip added");
+        }catch (Exception e){
+            log.error(e.toString());
+        }
+    }
+
+    /**
+     * Delete trip from database
+     * @param name
+     */
+    public void deleteTrip(String name){
+        try{
+            MongoDatabase database = client.getDatabase("tripplanner");
+            MongoCollection<Document> collection = database.getCollection("trips");
+            collection.deleteOne(Filters.eq("title", name));
+            log.okay("Trip deleted");
         }catch (Exception e){
             log.error(e.toString());
         }

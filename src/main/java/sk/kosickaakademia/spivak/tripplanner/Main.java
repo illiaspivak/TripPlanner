@@ -8,8 +8,9 @@ public class Main
 {
     public static void main( String[] args )
     {
-        TestInsertTripJSON();
         TestGetAllTripsJson();
+        TestDeleteTrip();
+        TestGetAllTrips();
     }
 
     public static void TestGetAllTrips(){
@@ -31,7 +32,11 @@ public class Main
         int difficultyLevel = 3;
         Trip trip = new Trip(title,place,distance,false,difficultyLevel);
         mongoDB.insertTripJSON(util.getJson(trip));
+    }
 
+    public static void TestDeleteTrip(){
+        MongoDB mongoDB = new MongoDB();
+        mongoDB.deleteTrip("Vodopád Skok");
     }
 
     public static void TestInsertTrip(){
