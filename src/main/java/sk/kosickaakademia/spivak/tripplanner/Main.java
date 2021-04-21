@@ -2,11 +2,13 @@ package sk.kosickaakademia.spivak.tripplanner;
 
 import sk.kosickaakademia.spivak.tripplanner.collections.Trip;
 import sk.kosickaakademia.spivak.tripplanner.database.MongoDB;
+import sk.kosickaakademia.spivak.tripplanner.util.Util;
 
 public class Main
 {
     public static void main( String[] args )
     {
+        TestInsertTripJSON();
         TestGetAllTripsJson();
     }
 
@@ -20,8 +22,15 @@ public class Main
         System.out.println(mongoDB.getAllTripsJson());
     }
 
-    public static void TestinsertTripJSON(){
+    public static void TestInsertTripJSON(){
         MongoDB mongoDB = new MongoDB();
+        Util util = new Util();
+        String title = "Velky Sokol";
+        String place = "Slovensky raj";
+        int distance = 35;
+        int difficultyLevel = 3;
+        Trip trip = new Trip(title,place,distance,false,difficultyLevel);
+        mongoDB.insertTripJSON(util.getJson(trip));
 
     }
 
