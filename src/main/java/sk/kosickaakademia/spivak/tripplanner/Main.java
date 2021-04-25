@@ -1,16 +1,18 @@
 package sk.kosickaakademia.spivak.tripplanner;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import sk.kosickaakademia.spivak.tripplanner.collections.Trip;
 import sk.kosickaakademia.spivak.tripplanner.database.MongoDB;
 import sk.kosickaakademia.spivak.tripplanner.util.Util;
 
+@SpringBootApplication
 public class Main
 {
     public static void main( String[] args )
     {
+        SpringApplication.run(Main.class,args);
         TestGetAllTripsJson();
-        TestDeleteTrip();
-        TestGetAllTrips();
     }
 
     public static void TestGetAllTrips(){
