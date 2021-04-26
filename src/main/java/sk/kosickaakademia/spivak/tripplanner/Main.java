@@ -12,7 +12,6 @@ public class Main
     public static void main( String[] args )
     {
         SpringApplication.run(Main.class,args);
-        TestGetAllTripsJson();
     }
 
     public static void TestGetAllTrips(){
@@ -38,7 +37,7 @@ public class Main
 
     public static void TestDeleteTrip(){
         MongoDB mongoDB = new MongoDB();
-        mongoDB.deleteTrip("Vodopád Skok");
+        mongoDB.deleteTrip("Sucha Bela");
     }
 
     public static void TestInsertTrip(){
